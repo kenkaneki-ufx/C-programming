@@ -26,5 +26,3 @@ void main()
     for(i=0;i<size;i++)
         printf("%d ",arr[i]);
 }
-
-// take a two array and merge them in ascending order
