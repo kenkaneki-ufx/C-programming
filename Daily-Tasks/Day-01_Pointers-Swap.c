@@ -11,10 +11,6 @@
    3. Then swap them with a function that takes POINTERS
    4. Print a and b after each attempt
 
-   You write ALL the code below. Start from the skeleton.
-
-   💬 Stuck? Write below the code:
-   // QUESTION: why doesn't it swap?
    ============================================================ */
 
 #include <stdio.h>
