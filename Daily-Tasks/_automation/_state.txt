@@ -1,6 +1,0 @@
-last-task=Day-02_Arrays.c
-done=1
-done-exe=C:\Users\SERVER\Desktop\Daily-Tasks\Day-02_Arrays.exe
-rollover=next-day
-queue-count=10
-checked=13-08-26 19:37:24
