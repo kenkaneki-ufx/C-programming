@@ -2,27 +2,29 @@
 #include<stdio.h>
 void smallest(int *arr,int n)
 {
-    int i,smallest = arr[0];
-    for(i=1;i<n;i++)
+    int i,pos=0,smallest = arr[pos];
+    for (i=1;i<n;i++)
     {
-        if(smallest > arr[i])
+        if(arr[i]<smallest)
         {
             smallest = arr[i];
-            break;
+            pos = i;
         }
     }
-    printf("\nThe smallest element %d is at %d position",smallest,i);
+    printf("\nThe smallest element %d is at %d position",smallest,pos);
 }
 void largest(int *arr,int n)
 {
-    int i,largest = arr[0];
+    int i,pos=0,largest = arr[pos];
     for(i=0;i<n;i++)
     {
         if (largest < arr[i])
-        largest = arr[i];
-        break;
+        {
+            largest = arr[i];
+            pos = i;
+        }
     }
-    printf("\nThe largest element %d is at %d position",largest,i);
+    printf("\nThe largest element %d is at %d position",largest,pos);
 }
 
 int main()
