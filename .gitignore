@@ -2,3 +2,5 @@ exe
 .vscode
 _queue
 Task_1.c
+*.exe
+_questions.log
