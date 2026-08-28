@@ -11,7 +11,7 @@ WHAT IS A STACK?
   Think of it like a stack of plates:
   - You ADD (push) a plate on TOP
   - You REMOVE (pop) the plate from TOP
-  - You can only see (peek) the TOP plate
+  - You can only see the TOP plate
   - You cannot access plates in the middle directly
 
   Visual:
@@ -32,46 +32,12 @@ WHAT IS A STACK?
 
 /* ==========================================================
    PART 1: STACK USING ARRAY
-   ==========================================================
-   
-   HOW IT WORKS:
-   - We use a simple array: int stack[5]
-   - We use a variable 'top' to track where the top element is
-   - top = -1 means stack is empty
-   - top = 4 means stack is full (for size 5)
-   
-   Visual:
-   Index:  [0]  [1]  [2]  [3]  [4]
-   Value:  10   20   30    -    -
-   Top:                     ^--- top = 2
    ========================================================== */
-
-// Step 1: Define the maximum size of our stack
 #define MAX_SIZE 5
 
-// Step 2: Function to check if stack is empty
-// When top = -1, no elements are in the stack
-int isEmpty(int top) {
-    return (top == -1);  // returns 1 (true) if empty, 0 (false) if not
-}
-
-// Step 3: Function to check if stack is full
-// When top = MAX_SIZE - 1, stack cannot accept more elements
-int isFull(int top) {
-    return (top == MAX_SIZE - 1);  // returns 1 if full, 0 if not
-}
-
-// Step 4: PUSH — Add element to top of stack
-// 
-// HOW PUSH WORKS:
-//   Before: top = 1, stack = [10, 20, _, _, _]
-//   Push 30:
-//     1. Increment top: top = 2
-//     2. Place 30 at stack[2]
-//   After:  top = 2, stack = [10, 20, 30, _, _]
-//
+// PUSH — Add element to top of stack
 void push(int stack[], int *top, int value) {
-    if (isFull(*top)) {
+    if (*top == MAX_SIZE - 1) {
         printf("  [OVERFLOW] Cannot push %d — Stack is full!\n", value);
         return;
     }
@@ -80,18 +46,9 @@ void push(int stack[], int *top, int value) {
     printf("  Pushed %d -> stack[%d]\n", value, *top);
 }
 
-// Step 5: POP — Remove and return the top element
-//
-// HOW POP WORKS:
-//   Before: top = 2, stack = [10, 20, 30, _, _]
-//   Pop:
-//     1. Save the value at stack[2] = 30
-//     2. Move top down by 1: top = 1
-//     3. Return the saved value (30)
-//   After:  top = 1, stack = [10, 20, _, _, _]
-//
+// POP — Remove and return the top element
 int pop(int stack[], int *top) {
-    if (isEmpty(*top)) {
+    if (*top == -1) {
         printf("  [UNDERFLOW] Cannot pop — Stack is empty!\n");
         return -1;
     }
@@ -101,24 +58,10 @@ int pop(int stack[], int *top) {
     return value;
 }
 
-// Step 6: PEEK — Look at the top element without removing it
-int peek(int stack[], int top) {
-    if (isEmpty(top)) {
-        printf("  [EMPTY] Stack is empty!\n");
-        return -1;
-    }
-    return stack[top];
-}
-
-// Step 7: DISPLAY — Show all elements
-//
-// HOW DISPLAY WORKS:
-//   Start from index 0, go up to top
-//   Print each element
-//
+// DISPLAY — Show all elements by traversing
 void display(int stack[], int top) {
-    if (isEmpty(top)) {
-        printf("  Stack is empty: []\n");
+    if (top == -1) {
+        printf("  Stack: [] (empty)\n");
         return;
     }
     printf("  Stack: [");
@@ -130,13 +73,8 @@ void display(int stack[], int top) {
     printf("  Top -> %d\n", stack[top]);
 }
 
-// Step 8: SIZE — Count how many elements are in the stack
-int size(int top) {
-    return top + 1;
-}
-
 /* ==========================================================
-   DEMO: Test all Array Stack operations
+   DEMO: Array Stack
    ========================================================== */
 void demoArrayStack() {
     int stack[MAX_SIZE];
@@ -146,9 +84,8 @@ void demoArrayStack() {
     printf("  PART 1: STACK USING ARRAY\n");
     printf("========================================\n\n");
 
-    // --- PUSH 5 ELEMENTS ---
-    printf("--- PUSH OPERATIONS ---\n");
-    printf("  (Adding elements to the top of stack)\n\n");
+    // --- PUSH ---
+    printf("--- PUSH OPERATIONS ---\n\n");
     
     push(stack, &top, 10);
     push(stack, &top, 20);
@@ -160,18 +97,12 @@ void demoArrayStack() {
     display(stack, top);
     printf("\n");
 
-    // --- TRY PUSHING WHEN FULL ---
+    // --- OVERFLOW TEST ---
     printf("--- OVERFLOW TEST ---\n\n");
     push(stack, &top, 60);
     printf("\n");
 
-    // --- PEEK ---
-    printf("--- PEEK OPERATION ---\n\n");
-    printf("  Top element = %d\n", peek(stack, top));
-    display(stack, top);
-    printf("\n");
-
-    // --- POP 3 ELEMENTS ---
+    // --- POP ---
     printf("--- POP OPERATIONS ---\n\n");
     
     pop(stack, &top);
@@ -180,10 +111,9 @@ void demoArrayStack() {
     
     printf("\n");
     display(stack, top);
-    printf("  Size = %d\n", size(top));
     printf("\n");
 
-    // --- POP ALL REMAINING ---
+    // --- POP ALL ---
     printf("--- POP ALL REMAINING ---\n\n");
     pop(stack, &top);
     pop(stack, &top);
@@ -200,38 +130,15 @@ void demoArrayStack() {
 
 /* ==========================================================
    PART 2: STACK USING LINKED LIST
-   ==========================================================
-   
-   HOW IT WORKS:
-   - Each element is a NODE containing data + pointer to next
-   - TOP points to the first node
-   - No fixed size — can grow as much as memory allows
-   - No overflow (unless memory runs out)
-   
-   Visual:
-   TOP -> [30|*] -> [20|*] -> [10|*] -> NULL
-   
-   Each node has:
-   - data: the value stored
-   - next: pointer to the next node
    ========================================================== */
 
-// Step 1: Define the Node structure
+// Node structure
 struct Node {
-    int data;           // The value stored in this node
-    struct Node* next;  // Pointer to the next node
+    int data;
+    struct Node* next;
 };
 
-// Step 2: PUSH — Add a new node at the beginning
-//
-// HOW PUSH WORKS:
-//   Before: TOP -> [20] -> [10] -> NULL
-//   Push 30:
-//     1. Create new node with data = 30
-//     2. New node's next = current top (20)
-//     3. Update top to point to new node
-//   After:  TOP -> [30] -> [20] -> [10] -> NULL
-//
+// PUSH — Add a new node at the beginning
 void pushLL(struct Node** top, int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     
@@ -247,16 +154,7 @@ void pushLL(struct Node** top, int value) {
     printf("  Pushed %d\n", value);
 }
 
-// Step 3: POP — Remove the top node
-//
-// HOW POP WORKS:
-//   Before: TOP -> [30] -> [20] -> [10] -> NULL
-//   Pop:
-//     1. Save the data from top node (30)
-//     2. Move top to next node (20)
-//     3. Free the old top node's memory
-//   After:  TOP -> [20] -> [10] -> NULL
-//
+// POP — Remove the top node
 int popLL(struct Node** top) {
     if (*top == NULL) {
         printf("  [UNDERFLOW] Stack is empty!\n");
@@ -272,12 +170,7 @@ int popLL(struct Node** top) {
     return value;
 }
 
-// Step 4: DISPLAY — Show all nodes by traversing
-//
-// HOW DISPLAY WORKS:
-//   Start at top, follow 'next' pointers until NULL
-//   This TRAVERSES the entire stack and prints each element
-//
+// DISPLAY — Show all nodes by traversing
 void displayLL(struct Node* top) {
     if (top == NULL) {
         printf("  Stack: NULL (empty)\n");
@@ -296,7 +189,7 @@ void displayLL(struct Node* top) {
 }
 
 /* ==========================================================
-   DEMO: Test all Linked List Stack operations
+   DEMO: Linked List Stack
    ========================================================== */
 void demoLLStack() {
     struct Node* top = NULL;
@@ -305,7 +198,7 @@ void demoLLStack() {
     printf("  PART 2: STACK USING LINKED LIST\n");
     printf("========================================\n\n");
 
-    // --- PUSH ELEMENTS ---
+    // --- PUSH ---
     printf("--- PUSH OPERATIONS ---\n\n");
     
     pushLL(&top, 10);
@@ -319,7 +212,7 @@ void demoLLStack() {
     
     printf("\n");
 
-    // --- POP ELEMENTS ---
+    // --- POP ---
     printf("--- POP OPERATIONS ---\n\n");
     
     popLL(&top);
@@ -334,7 +227,7 @@ void demoLLStack() {
 }
 
 /* ==========================================================
-   MAIN — Run both demos
+   MAIN
    ========================================================== */
 int main() {
     printf("\n");
@@ -353,11 +246,7 @@ int main() {
     printf("  ---------     ----------                ----\n");
     printf("  PUSH          Add element to top        O(1)\n");
     printf("  POP           Remove top element        O(1)\n");
-    printf("  PEEK          See top element           O(1)\n");
-    printf("  isEmpty       Check if stack empty      O(1)\n");
-    printf("  isFull        Check if stack full       O(1)\n");
-    printf("  display       Show all elements         O(n)\n");
-    printf("  size          Count elements            O(1)\n\n");
+    printf("  display       Show all elements         O(n)\n\n");
 
     printf("  KEY CONCEPTS:\n");
     printf("  - Stack follows LIFO (Last In, First Out)\n");
