@@ -1,6 +1,6 @@
 /*
 ============================================================
-  STACK ALL OPERATIONS — AKTU UNIT 2
+  STACK ALL OPERATIONS - AKTU UNIT 2
   Simple Teaching Version
 ============================================================
 
@@ -35,10 +35,10 @@ WHAT IS A STACK?
    ========================================================== */
 #define MAX_SIZE 5
 
-// PUSH — Add element to top of stack
+// PUSH - Add element to top of stack
 void push(int stack[], int *top, int value) {
     if (*top == MAX_SIZE - 1) {
-        printf("  [OVERFLOW] Cannot push %d — Stack is full!\n", value);
+        printf("  [OVERFLOW] Cannot push %d - Stack is full!\n", value);
         return;
     }
     (*top)++;
@@ -46,10 +46,10 @@ void push(int stack[], int *top, int value) {
     printf("  Pushed %d -> stack[%d]\n", value, *top);
 }
 
-// POP — Remove and return the top element
+// POP - Remove and return the top element
 int pop(int stack[], int *top) {
     if (*top == -1) {
-        printf("  [UNDERFLOW] Cannot pop — Stack is empty!\n");
+        printf("  [UNDERFLOW] Cannot pop - Stack is empty!\n");
         return -1;
     }
     int value = stack[*top];
@@ -58,7 +58,7 @@ int pop(int stack[], int *top) {
     return value;
 }
 
-// DISPLAY — Show all elements by traversing
+// DISPLAY - Show all elements by traversing
 void display(int stack[], int top) {
     if (top == -1) {
         printf("  Stack: [] (empty)\n");
@@ -138,7 +138,7 @@ struct Node {
     struct Node* next;
 };
 
-// PUSH — Add a new node at the beginning
+// PUSH - Add a new node at the beginning
 void pushLL(struct Node** top, int value) {
     struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
     
@@ -154,7 +154,7 @@ void pushLL(struct Node** top, int value) {
     printf("  Pushed %d\n", value);
 }
 
-// POP — Remove the top node
+// POP - Remove the top node
 int popLL(struct Node** top) {
     if (*top == NULL) {
         printf("  [UNDERFLOW] Stack is empty!\n");
@@ -170,7 +170,7 @@ int popLL(struct Node** top) {
     return value;
 }
 
-// DISPLAY — Show all nodes by traversing
+// DISPLAY - Show all nodes by traversing
 void displayLL(struct Node* top) {
     if (top == NULL) {
         printf("  Stack: NULL (empty)\n");
@@ -232,7 +232,7 @@ void demoLLStack() {
 int main() {
     printf("\n");
     printf("============================================\n");
-    printf("    STACK ALL OPERATIONS — AKTU UNIT 2\n");
+    printf("    STACK ALL OPERATIONS - AKTU UNIT 2\n");
     printf("============================================\n");
 
     demoArrayStack();
@@ -252,7 +252,7 @@ int main() {
     printf("  - Stack follows LIFO (Last In, First Out)\n");
     printf("  - Array stack has FIXED size (overflow possible)\n");
     printf("  - Linked list stack has DYNAMIC size (no overflow)\n");
-    printf("  - All basic operations are O(1) — very fast!\n\n");
+    printf("  - All basic operations are O(1) - very fast!\n\n");
 
     return 0;
 }
