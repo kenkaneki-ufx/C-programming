@@ -378,11 +378,6 @@ void demoLLStack() {
     popLL(&top);  // Removes 10
     displayLL(top);
     printf("\n");
-
-    // --- UNDERFLOW TEST ---
-    printf("--- UNDERFLOW TEST ---\n");
-    popLL(&top);  // Empty stack!
-    printf("\n");
 }
 
 /* ==========================================================
