@@ -119,7 +119,7 @@ int main()
                 }
             }
           }
-        printf("\n%d %d\n", visited[0],count[0]);
+        printf("%d %d\n", visited[0],count[0]);
         t--;
     }
 }
