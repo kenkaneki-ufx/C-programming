@@ -122,7 +122,7 @@ void main()
 {   
    int choice,num1,num2;      // 1. Declare variables
    
-   while (choice != 6)        // 2. Create loop for menu
+   do        // 2. Create loop for menu
    {
       displayMenu();          // 3. Display menu
       
@@ -155,5 +155,5 @@ void main()
          printf("\n[ %d mod %d = %d ]\n", num1, num2, modulus(num1,num2));
       else 
          printf("\nInvalid choice.");
-   }
+   } while (choice != 6);
 }
