@@ -122,8 +122,7 @@ void main()
 {   
    int choice,num1,num2;      // 1. Declare variables
    
-   do        // 2. Create loop for menu
-   {
+   do {       // 2. Create loop for menu
       displayMenu();          // 3. Display menu
       
       choice = getChoice();    // 4. Get user choice
