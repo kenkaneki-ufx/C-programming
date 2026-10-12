@@ -118,7 +118,6 @@ int binarySearch(int arr[], int n, int key)
 }
 
 void main() {
-    // Write your code here
     // 1. Declare variables
     int arr[100],i,n,key;
 
